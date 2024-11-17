@@ -1,3 +1,7 @@
+// ! c++
+// Test system cpp
+// Copyright by @Truongchinh304
+
 #include <bits/stdc++.h>
 #include <cstdlib> // random
 #include <unistd.h> // time delay (sleep)
