@@ -1,3 +1,7 @@
+# ! py
+# Bot telebank 
+# Copyright by @Truongchinh304
+
 import telebot, os, hashlib
 from telebot import types
 from datetime import datetime 
