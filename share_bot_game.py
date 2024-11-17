@@ -21,7 +21,7 @@ print("\nBot đang hoạt động ...\n")
 
 # Thông tin / thời gian .
 user_list = set()
-admin_id = "5748482452" # id admin 
+admin_id = "THAY ID ADMIN" # id admin 
 def thoi_gian_hien_tai():
     thoi_gian_hien_tai = datetime.now() + timedelta(hours=0)
     gio_phut_giay = thoi_gian_hien_tai.strftime("%H:%M:%S")
