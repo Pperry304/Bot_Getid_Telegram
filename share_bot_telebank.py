@@ -14,7 +14,7 @@ path_luu_bill_nap = "D:\\Python\\bill_nap.txt" # lưu bill nạp của admin cho
 path_luu_bill_chuyen = "D:\\Python\\bill_chuyen.txt" # lưu bill chuyển tiền cho mọi user
 path_luu_bill_nhan = "D:\\Python\\bill_nhan.txt" # lưu bill nhận tiền cho mọi user
 
-ID_ADMIN = "5748482452"
+ID_ADMIN = "THAY ID ADMIN"
 
 def thoi_gian_hien_tai():
     return datetime.now().strftime('%H:%M:%S ngày %d/%m/%Y')
