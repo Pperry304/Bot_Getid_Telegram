@@ -1,5 +1,5 @@
 # ! py
-# Bot tradingview 
+# Bot dich
 # Copyright by @Truongchinh304
 
 import os
