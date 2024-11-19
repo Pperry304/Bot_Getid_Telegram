@@ -1,5 +1,5 @@
 # ! py
-# Bot tradingview 
+# Bot body
 # Copyright by @Truongchinh304
 
 import os, telebot
