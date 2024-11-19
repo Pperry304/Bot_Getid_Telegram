@@ -1,3 +1,7 @@
+# ! py
+# Bot tradingview 
+# Copyright by @Truongchinh304
+
 import telebot, os
 from datetime import datetime
 from gtts import gTTS
