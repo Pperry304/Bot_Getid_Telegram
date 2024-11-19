@@ -1,4 +1,6 @@
-# Code by @TruongChinh304
+# ! py
+# Bot tradingview 
+# Copyright by @Truongchinh304
 
 import os, telebot
 from telebot import types 
