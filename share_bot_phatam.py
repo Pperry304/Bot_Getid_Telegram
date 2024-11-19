@@ -1,5 +1,5 @@
 # ! py
-# Bot tradingview 
+# Bot phat am
 # Copyright by @Truongchinh304
 
 import telebot, os
