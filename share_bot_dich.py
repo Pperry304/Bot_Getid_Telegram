@@ -1,4 +1,3 @@
-
 # ! py
 # Bot tradingview 
 # Copyright by @Truongchinh304
