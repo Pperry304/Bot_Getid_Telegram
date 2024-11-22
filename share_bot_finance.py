@@ -6,7 +6,7 @@ from telebot import types
 from datetime import datetime, timedelta
 
 URL_API_BINANCE= 'https://api.binance.com/api/v3'
-API_TOKEN_BOT = '6790339105:AAEKvcd-EmkC3mXI3IDAWVi9uIienb7B-DM'
+API_TOKEN_BOT = 'THAY_API_BOT'
 bot = telebot.TeleBot(API_TOKEN_BOT)
 
 matplotlib.use('Agg')
