@@ -11,7 +11,7 @@ from fpdf import FPDF
 from datetime import datetime, timedelta
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-TOKEN_API_BOT = '6790339105:AAEKvcd-EmkC3mXI3IDAWVi9uIienb7B-DM'
+TOKEN_API_BOT = 'THAY_API_BOT'
 URL_API_BINANCE= 'https://api.binance.com/api/v3'
 bot = telebot.TeleBot(TOKEN_API_BOT)
 matplotlib.use('Agg') # không dùng đồ họa trực tiếp
