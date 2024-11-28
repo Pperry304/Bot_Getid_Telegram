@@ -5,7 +5,7 @@
 import telebot
 from telebot import types 
 
-API_BOT = "7619364941:AAEM0SOrpC2onOE-5kwZ3P-gZaxGq3fE9kM" # API BOT ĐÃ THAY
+API_BOT = "THAY_API_BOT" 
 bot = telebot.TeleBot(API_BOT)
 
 @bot.message_handler(commands=['start'])
