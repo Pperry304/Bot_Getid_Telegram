@@ -7,7 +7,7 @@
 import requests, telebot, os
 from telebot import types
 
-API_TOKEN_BOT = "THAY_API_BOT"
+API_TOKEN_BOT = "6790339105:AAEKvcd-EmkC3mXI3IDAWVi9uIienb7B-DM"
 bot = telebot.TeleBot(API_TOKEN_BOT)
 filename ="D:\\Python\\QR_LINK_CODE.png"
 
@@ -23,7 +23,7 @@ def download_qr_image(url, noi_dung,  message):
         with open(filename, "rb") as file:    
             bot.send_photo(message.chat.id, file, caption = noi_dung, parse_mode = "HTML")
         os.remove(filename)    
-        #print(f"QR code đã được tải xuống thành công: {filename}")
+        print(f"QR code đã được tải xuống thành công: {filename}")
     else:
         print("Không thể tải QR code. Vui lòng kiểm tra lại URL")
 
@@ -41,8 +41,9 @@ bank_list = [
 def lay_thong_tin(message):
     User_id = str(message.chat.id)
     try:
-        '''so_tai_khoan = "00230042006" 
-        ten_ngan_hang = "mbbank"'''
+        # donate admin nếu thấy hay =))))))))
+        '''so_tai_khoan: "00230042006" 
+        ten_ngan_hang: mbbank'''
         parts = message.text.split(maxsplit=4)
         if len(parts) != 5:
             bot.send_message(message.chat.id, "<b>Nhập theo định dạng /qrbank [STK] [Mã bank] [Số tiền]</b>", parse_mode = "HTML")
