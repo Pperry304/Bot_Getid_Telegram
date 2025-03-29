@@ -1,5 +1,5 @@
 # ! py
-# Bot citradingview 
+# Bot c_tradingview 
 # Copyright by NTC
 
 import os, http.client, sys
@@ -78,11 +78,11 @@ def Banner():
         except requests.RequestException:
             print("Lỗi kết nối! Kiểm tra internet và nhập lại.")'''
 
-Banner()
+#Banner()
 TOKEN_API_BOT = "6790339105:AAEKvcd-EmkC3mXI3IDAWVi9uIienb7B-DM"  
 URL_API_BINANCE= 'https://api.binance.com/api/v3'
 bot = telebot.TeleBot(TOKEN_API_BOT)
-matplotlib.use('Agg') # không dùng đồ họa trực tiếp
+matplotlib.use('Agg') 
 
 # Hàm lấy tỷ giá usd đổi sang vnd 
 def lay_ty_gia_vnd():
@@ -112,7 +112,12 @@ def lay_thong_tin_gioi_han_crypto(ten_crypto, timestamp_thoi_gian_muon_lay, time
     })
     datas = response.json()
     return datas
-        
+
+# hàm lấy qrlink của sepay 
+def qrlink(so_tai_khoan, ten_ngan_hang, so_tien, noi_dung, download):
+    qrlink = f"https://qr.sepay.vn/img?acc={so_tai_khoan}&bank={ten_ngan_hang}&amount={so_tien}&des={noi_dung}&template=compact&download={download}"
+    return qrlink
+
 @bot.message_handler(commands=['start'])
 def start(message):
     user_name = message.from_user.username
@@ -143,21 +148,22 @@ def huong_dan_su_dung(message):
     huong_dan_su_dung = (
         "<b>HƯỚNG DẪN SỬ DỤNG\n"
         "Lệnh 1: /list (xem danh sách các đồng crypto)\n"
-        "Lệnh 2: /tpsl [tên coin] [giá chốt lời (TP)] [giá chốt lỗ (SL)] (xem thông tin coin đó)\n"
-        "Lệnh 3: /stop (ngưng theo dõi lệnh đang chạy)\n"
-        "Lệnh 4: /gpi [tên coin] [khoảng thời gian muốn lấy thông tin (phút)]\n"
-        "Lệnh 5: /about (xem thông tin account và bot)\n"
-        "Lệnh 6: /finance [tên coin] [khoảng thời giaan (phút)] (xem nến)\n"
-        "Lệnh 7: /pfinance [chỉ báo] [tên coin] [khoảng thời gian (phút)]\n"
-        "Lưu ý:\n"
-        "Khi 1 lệnh đang chạy mà muốn thay TP/SL thì chỉ cần nhập như lệnh và thay đổi TP/SL muốn thay\n"
-        "Lệnh sẽ được update giá mới sau mỗi 3 giây\n"
-        "Nếu nhập lệnh mới bằng coin khác thì lệnh thông tin coin cũ sẽ dừng.</b>"
+        #"Lệnh 2: /tpsl [tên coin] [giá chốt lời (TP)] [giá chốt lỗ (SL)] (xem thông tin coin đó)\n"
+        #"Lệnh 3: /stop (ngưng theo dõi lệnh đang chạy)\n"
+        "Lệnh 2: /gpi [tên coin] [khoảng thời gian muốn lấy thông tin (phút)]\n(Xem thông tin coin dưới dạng json)\n"
+        "Lệnh 3: /about (xem thông tin account và bot)\n"
+        "Lệnh 4: /finance [tên coin] [khoảng thời giaan (phút)] (xem nến)\n(Xem tất cả thông tin về coin + chỉ báo trong thời gian nhất định)\n"
+        "Lệnh 5: /pfinance [chỉ báo] [tên coin] [khoảng thời gian (phút)]\n(Xem thông tin coin chứa chỉ báo và thời gian nhất định)</b>\n"
+        "Lệnh 6: /qrbank [số tiền] [nội dung chuyển khoản]\n(Qr donut cho Admin :V)\n"
+        #"Lưu ý:\n"
+        #"Khi 1 lệnh đang chạy mà muốn thay TP/SL thì chỉ cần nhập như lệnh và thay đổi TP/SL muốn thay\n"
+        #"Lệnh sẽ được update giá mới sau mỗi 3 giây\n"
+        #"Nếu nhập lệnh mới bằng coin khác thì lệnh thông tin coin cũ sẽ dừng.</b>"
     )    
     bot.send_message(message.chat.id, huong_dan_su_dung, parse_mode = "HTML")
 
 # Lệnh /stop
-@bot.message_handler(commands=['stop'])
+#@bot.message_handler(commands=['stop'])
 def dung_theo_doi(message):
     global trang_thai_lenh
     if trang_thai_lenh['dang_chay']:
@@ -239,7 +245,7 @@ def tinh_trung_binh_gia_gan_nhat(ten_crypto):
         return gia_trung_binh 
 
 # Hàm xem khối lượng giá 24h và tpsl     
-@bot.message_handler(commands=['tpsl'])
+#@bot.message_handler(commands=['tpsl'])
 def gui_thong_tin_crypto_usd(message):
     global trang_thai_lenh
     try:
@@ -921,8 +927,65 @@ def pfinance(message):
     except Exception as e:
         bot.send_message(message.chat.id, f"<b>Đã xảy ra lỗi {e}</b>", parse_mode="HTML")        
 
-def ghi_noi_dung_vao_file_du_doan():
+file_name = "QR_LINK_CODE.png"
+def download_qr_image(url, noi_dung,  message):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(filename, "wb") as file:
+            file.write(response.content)
+        with open(filename, "rb") as file:    
+            bot.send_photo(message.chat.id, file, caption = noi_dung, parse_mode = "HTML")
+        os.remove(filename)    
+        print(f"QR code đã được tải xuống thành công: {filename}")
+    else:
+        print("Không thể tải QR code. Vui lòng kiểm tra lại URL")
 
+@bot.message_handler(commands=["qrbank"])
+def lay_thong_tin(message):
+    User_id = str(message.chat.id)
+    bank_list = [
+        "mbbank", "dongabank", "viettinbank", "vietcombank", "techcombank", 
+        "bidv", "acb", "sacombank", "vpbank", "agribank",
+        "hdbank", "tpbank", "shb", "eximbank", "ocb",
+        "seabank", "bacabank", "pvcombank", "scb", "vib",
+        "namabank", "abbank", "lpbank", "vietabank", "msb",
+        "nvbank", "pgbank", "publicbank", "cimbbank", "uob"
+    ]
+    try:
+        parts = message.text.split(maxsplit=2)
+        if len(parts) != 3:
+            bot.send_message(message.chat.id, "<b>Nhập theo định dạng /qrbank [Số tiền] [Nội dung chuyển khoản]</b>", parse_mode = "HTML")
+            return 
+        so_tien = int(parts[1])
+        if not isinstance(so_tien, int):
+            bot.send_message(message.chat.id, "<b>Tiền phải là số nguyên, nếu không muốn để số tiền thì nhập 0</b>", parse_mode = "HTML")
+            return
+        if so_tien < 10000:
+            bot.send_message(message.chat.id, "<b>Tiền phải lớn hơn 10.000 VNĐ</b>", parse_mode = "HTML")
+            return    
+        so_tai_khoan = "1430042006"
+        ma_ngan_hang = "techcombank"
+        noi_dung = ""    
+        noi_dung_nguoi_nhap = " ".join(parts[2:]) if len(parts) > 2 else ""
+        if(noi_dung_nguoi_nhap == ""):
+            noi_dung = "Chuyển khoản" 
+        else:
+            noi_dung = noi_dung_nguoi_nhap    
+        link = qrlink(so_tai_khoan, ma_ngan_hang, so_tien, noi_dung, "true")
+        dinh_dang_so_tien = f"{so_tien:,.0f}"
+        dinh_dang_so_tien = dinh_dang_so_tien.replace(",", ".")
+        noi_dung_thong_tin = (
+            f"<b>➤ THÔNG TIN QRCODE !!!\n" 
+            f"┏━━━━━━━━━━━━━━━━━━━━━━━┓\n"
+            f"┣➤ 💳 Số TK: <code>{so_tai_khoan}</code>\n"
+            f"┣➤ 🏦 Bank: {ma_ngan_hang.upper()}\n"
+            f"┣➤ 💵 Số tiền: {dinh_dang_so_tien} VNĐ\n"
+            f"┣➤ 📋 Nội dung: <code>{noi_dung}</code>\n"
+            f"┗━━━━━━━━━━━━━━━━━━━━━━━┛</b>\n"
+        )
+        download_qr_image(link, noi_dung_thong_tin, message)
+    except Exception as e:
+        bot.send_message(message.chat.id, f"<b>Đã xảy ra lỗi: {e}</b>", parse_mode = "HTML")    
 
 # Hàm trả lời ngoại lệ     
 @bot.message_handler(func=lambda message: True)
@@ -936,7 +999,7 @@ def tra_loi_ngoai_le(message):
 def RUN_BOT_TRADINGVIEW():
     try:
         while True:
-            if lay_thong_tin_crypto("BTCUSDT") and lay_ty_gia_vnd() and lay_danh_sach_crypto():
+            if lay_thong_tin_crypto("BTCUSDT") and lay_ty_gia_vnd() and lay_danh_sach_crypto() and qrlink("00230042006", "mbbbank", "50000", "", "false"):
                 print("Kết nối tất cả thành công")
                 break    
         print("BOT ĐANG HOẠT ĐỘNG ...")         
