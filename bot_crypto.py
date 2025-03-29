@@ -130,7 +130,7 @@ def start(message):
 def gui_danh_sach_crypto(message):
     danh_sach = lay_danh_sach_crypto()
     noi_dung = 'Danh sách các đồng crypto:\n' + '\n'.join(danh_sach)
-    file_path_list_crypto = "D:\\Python\\list_crypto.txt"
+    file_path_list_crypto = "list_crypto.txt"
     if len(noi_dung) > 4096:
         with open(file_path_list_crypto, "w", encoding = "utf-8") as file:
             file.write(noi_dung)
@@ -504,7 +504,7 @@ def lay_gia_trong_khoang_thoi_gian(message):
 
 # Hàm ghi nội dung vào file đúng JSON
 def ghi_noi_dung_vao_file(ten_crypto, khoang_thoi_gian, danh_sach_noi_dung, message):
-    file_path_crypto = f"D:\\Python\\{ten_crypto}-{khoang_thoi_gian}.json"
+    file_path_crypto = f"{ten_crypto}-{khoang_thoi_gian}.json"
     try:
         with open(file_path_crypto, "w", encoding="utf-8") as file:  # Ghi đè file mới
             json.dump(danh_sach_noi_dung, file, indent=4, ensure_ascii=False)
@@ -547,7 +547,7 @@ def lay_thong_tin_gioi_han_crypto_chart(ten_crypto, timestamp_thoi_gian_muon_lay
         return None
 
 def ghi_vao_file(ten_crypto, danh_sach_moi):
-    file_path = f'D:\\Python\\{ten_crypto.upper()}.json'
+    file_path = f'{ten_crypto.upper()}.json'
     try:
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -562,7 +562,7 @@ def ghi_vao_file(ten_crypto, danh_sach_moi):
 
 # Biểu đồ chỉ báo MA
 def ve_bieu_do_nen_ma(message, ten_crypto):
-    with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+    with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     if not data:  
         bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể vẽ biểu đồ</b>", parse_mode="HTML")
@@ -592,15 +592,15 @@ def ve_bieu_do_nen_ma(message, ten_crypto):
         volume=True,  
         ylabel_lower="Khối lượng",
         mav=(5, 10),  # Thêm MA
-        savefig='D:\\Python\\bieudo_ma.png'  
+        savefig='bieudo_ma.png'  
     )
-    with open('D:\\Python\\bieudo_ma.png', 'rb') as file:
+    with open('bieudo_ma.png', 'rb') as file:
         thoi_gian_hien_tai = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         bot.send_photo(message.chat.id, file, caption = f'<b>Biểu đồ nến MA của {ten_crypto} lúc: {thoi_gian_hien_tai}</b>', parse_mode="HTML")
 
 # Biểu đồ chỉ báo BOLL 
 def ve_bieu_do_nen_boll(message, ten_crypto):
-    with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+    with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     if not data:  
         bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể vẽ biểu đồ</b>", parse_mode="HTML")
@@ -638,14 +638,14 @@ def ve_bieu_do_nen_boll(message, ten_crypto):
         volume=True,
         ylabel_lower="Khối lượng",
         addplot=apds,  # Thêm Bollinger Bands
-        savefig='D:\\Python\\bieudo_boll.png'
+        savefig='bieudo_boll.png'
     )
-    with open('D:\\Python\\bieudo_boll.png', 'rb') as file:
+    with open('bieudo_boll.png', 'rb') as file:
         thoi_gian_hien_tai = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         bot.send_photo(message.chat.id, file, caption = f'<b>Biểu đồ nến BOLL của {ten_crypto} lúc: {thoi_gian_hien_tai}</b>', parse_mode="HTML")
 
 def ve_bieu_do_nen_ema(message, ten_crypto):
-    with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+    with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     if not data:  
         bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể vẽ biểu đồ</b>", parse_mode="HTML")
@@ -679,14 +679,14 @@ def ve_bieu_do_nen_ema(message, ten_crypto):
         volume=True,
         ylabel_lower="Khối lượng",
         addplot=apds,  # Thêm EMA vào biểu đồ
-        savefig='D:\\Python\\bieudo_ema.png'
+        savefig='bieudo_ema.png'
     )
-    with open('D:\\Python\\bieudo_ema.png', 'rb') as file:
+    with open('bieudo_ema.png', 'rb') as file:
         thoi_gian_hien_tai = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         bot.send_photo(message.chat.id, file, caption = f'<b>Biểu đồ nến EMA của {ten_crypto} lúc: {thoi_gian_hien_tai}</b>', parse_mode="HTML")    
 
 def ve_bieu_do_nen_sar(message, ten_crypto):
-    with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+    with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     if not data:
         bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể vẽ biểu đồ</b>", parse_mode="HTML")
@@ -739,12 +739,12 @@ def ve_bieu_do_nen_sar(message, ten_crypto):
     mpf.plot(df, type='candle', style='charles',
              title=f"Biểu đồ SAR của {ten_crypto}/USDT",
              ylabel="Giá (USDT)", volume=True,
-             addplot=apds, savefig='D:\\Python\\bieudo_sar.png')
-    with open('D:\\Python\\bieudo_sar.png', 'rb') as file:
+             addplot=apds, savefig='bieudo_sar.png')
+    with open('bieudo_sar.png', 'rb') as file:
         bot.send_photo(message.chat.id, file, caption=f"<b>Biểu đồ SAR của {ten_crypto}</b>", parse_mode="HTML")
 
 def ve_bieu_do_nen_avl(message, ten_crypto):
-    with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+    with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
         data = json.load(file)
     if not data:
         bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể vẽ biểu đồ</b>", parse_mode="HTML")
@@ -770,13 +770,13 @@ def ve_bieu_do_nen_avl(message, ten_crypto):
     mpf.plot(df, type='candle', style='charles',
              title=f"Biểu đồ AVL của {ten_crypto}/USDT",
              ylabel="Giá (USDT)", volume=True,
-             addplot=apds, savefig='D:\\Python\\bieudo_avl.png')
-    with open('D:\\Python\\bieudo_avl.png', 'rb') as file:
+             addplot=apds, savefig='bieudo_avl.png')
+    with open('bieudo_avl.png', 'rb') as file:
         bot.send_photo(message.chat.id, file, caption=f"<b>Biểu đồ AVL của {ten_crypto}</b>", parse_mode="HTML")
 
 def du_doan_mua_ban(message, ten_crypto):
     try:
-        with open(f"D:\\Python\\{ten_crypto}.json", "r", encoding="utf-8") as file:
+        with open(f"{ten_crypto}.json", "r", encoding="utf-8") as file:
             data = json.load(file)
         if not data:  
             bot.send_message(message.chat.id, "<b>Dữ liệu rỗng, không thể đưa ra dự đoán</b>", parse_mode="HTML")
@@ -817,7 +817,7 @@ def tao_pdf_tu_anh(ten_crypto, noi_dung_du_doan):
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
-    pdf.add_font("FreeSerif", '', "D:\\Python\\FreeSerif.ttf", uni=True)
+    pdf.add_font("FreeSerif", '', "FreeSerif.ttf", uni=True)
     pdf.set_font("FreeSerif", size=14)
     pdf.cell(200, 10, txt=f"Biểu đồ phân tích {ten_crypto}", ln=True, align='C')
     pdf.cell(200, 10, txt=f"{noi_dung_du_doan}")
@@ -830,8 +830,8 @@ def tao_pdf_tu_anh(ten_crypto, noi_dung_du_doan):
     ]
     for hinh in danh_sach_bieu_do:
         pdf.add_page()
-        pdf.image(f'D:\\Python\\{hinh}', x=10, y=30, w=190)
-    pdf_path = f"D:\\Python\\{ten_crypto}_chart_analysis.pdf"
+        pdf.image(f'{hinh}', x=10, y=30, w=190)
+    pdf_path = f"{ten_crypto}_chart_analysis.pdf"
     pdf.output(pdf_path)    
     return pdf_path
 
@@ -865,12 +865,12 @@ def finance(message):
         pdf_path = tao_pdf_tu_anh(ten_crypto, noi_dung_du_doan)
         with open(pdf_path, 'rb') as pdf_file:
             bot.send_document(message.chat.id, pdf_file, caption=f"<b>Phân tích biểu đồ {ten_crypto} trong {khoang_thoi_gian_muon_lay} phút</b>", parse_mode="HTML")
-        os.remove(f'D:\\Python\\{ten_crypto.upper()}.json')    
-        os.remove('D:\\Python\\bieudo_ma.png')
-        os.remove('D:\\Python\\bieudo_boll.png')
-        os.remove('D:\\Python\\bieudo_ema.png')
-        os.remove('D:\\Python\\bieudo_sar.png')
-        os.remove('D:\\Python\\bieudo_avl.png')
+        os.remove(f'{ten_crypto.upper()}.json')    
+        os.remove('bieudo_ma.png')
+        os.remove('bieudo_boll.png')
+        os.remove('bieudo_ema.png')
+        os.remove('bieudo_sar.png')
+        os.remove('bieudo_avl.png')
         os.remove(pdf_path)
     except Exception as e:
         bot.send_message(message.chat.id, f"<b>Đã xảy ra lỗi: {e}</b>", parse_mode="HTML")        
@@ -903,21 +903,21 @@ def pfinance(message):
         lay_thong_tin_gioi_han_crypto_chart(ten_crypto, timestamp_thoi_gian_muon_lay, timestamp_hien_tai, message)
         if loai_chi_bao == "ma":
             ve_bieu_do_nen_ma(message, ten_crypto)
-            os.remove("D:\\Python\\bieudo_ma.png")
+            os.remove("bieudo_ma.png")
         elif loai_chi_bao == "boll":
             ve_bieu_do_nen_boll(message, ten_crypto)
-            os.remove("D:\\Python\\bieudo_boll.png")
+            os.remove("bieudo_boll.png")
         elif loai_chi_bao == "ema":    
             ve_bieu_do_nen_ema(message, ten_crypto)
-            os.remove("D:\\Python\\bieudo_ema.png")
+            os.remove("bieudo_ema.png")
         elif loai_chi_bao == "sar":
             ve_bieu_do_nen_sar(message, ten_crypto)
-            os.remove("D:\\Python\\bieudo_sar.png")
+            os.remove("bieudo_sar.png")
         else:
             ve_bieu_do_nen_avl(message, ten_crypto)
-            os.remove("D:\\Python\\bieudo_avl.png")
-        if os.path.exists(f"D:\\Python\\{ten_crypto}.json"):
-            os.remove(f"D:\\Python\\{ten_crypto}.json")    
+            os.remove("bieudo_avl.png")
+        if os.path.exists(f"{ten_crypto}.json"):
+            os.remove(f"{ten_crypto}.json")    
     except Exception as e:
         bot.send_message(message.chat.id, f"<b>Đã xảy ra lỗi {e}</b>", parse_mode="HTML")        
 
