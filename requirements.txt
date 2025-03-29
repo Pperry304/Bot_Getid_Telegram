@@ -1,0 +1,10 @@
+requests
+telebot
+pandas
+matplotlib
+mplfinance
+fpdf
+lequangminh
+pandas-ta==0.3.14b0
+panda_ta
+numpy==1.24.3
