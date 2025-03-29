@@ -927,7 +927,7 @@ def pfinance(message):
     except Exception as e:
         bot.send_message(message.chat.id, f"<b>Đã xảy ra lỗi {e}</b>", parse_mode="HTML")        
 
-file_name = "QR_LINK_CODE.png"
+filename = "QR_LINK_CODE.png"
 def download_qr_image(url, noi_dung,  message):
     response = requests.get(url)
     if response.status_code == 200:
