@@ -1,8 +1,0 @@
-requests
-telebot
-pandas
-matplotlib
-mplfinance
-fpdf
-lequangminh
-pandas-ta==0.3.14b0
