@@ -26,11 +26,11 @@ pip install pyTelegramBotAPI deep-translator
 2. Sử dụng lệnh:
    
    ```
-   /translate <ngôn_ngữ_đích> <nội_dung>
+   /text <ngôn_ngữ_đích> <nội_dung>
    ```
    Ví dụ:
    ```
-   /translate en Xin chào
+   /text en Xin chào
    ```
    Bot sẽ trả về: "Hello"
 
