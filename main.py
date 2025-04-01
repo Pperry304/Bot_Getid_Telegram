@@ -1,13 +1,12 @@
 # ! py
 # Bot tradingview 
-# Copyright by @Truongchinh304
+# Copyright by NTC
 
 import telebot
 from telebot import types
 
 bot = telebot.TeleBot("THAY_API_BOT")
 
-print("Chờ tin nhắn...\n")
 # Hàm xử lý lệnh /start
 @bot.message_handler(commands=["start"])
 def handle_start(message):
