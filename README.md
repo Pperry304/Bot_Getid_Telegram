@@ -1,4 +1,4 @@
-# Bot Dịch Thuật trên Telegram
+# Bot Translate Telegram
 
 ## Giới thiệu
 Đây là bot Telegram giúp dịch tin nhắn sang nhiều ngôn ngữ khác nhau. Người dùng có thể gửi văn bản đến bot, và bot sẽ trả về nội dung đã dịch theo ngôn ngữ được chọn.
